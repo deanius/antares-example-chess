@@ -3,7 +3,7 @@ import Pending from './pending'
 export default class Accepted extends Pending {
     constructor() {
         super()
-        Object.assign(this, {
+        return this.merge({
             status: 'accepted',
             repliedAt: new Date()
         })

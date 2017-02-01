@@ -1,10 +1,11 @@
-import Faker from 'faker'
+import { Antares } from '/imports/antares/main'
+
+const { Immutable } = Antares
 
 export default class Draw {
     constructor() {
-        Object.assign(this, {
-            status: 'pending',
-            createdAt: Faker.date.recent()
+        return Immutable.fromJS({
+            status: 'pending'
         })
     }
 }
