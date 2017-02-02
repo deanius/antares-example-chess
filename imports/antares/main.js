@@ -26,7 +26,9 @@ inAgencyRun('client', () => {
 // In 'any' agent expose a top-level Antares global for demo purposes
 inAgencyRun('any', function () {
     Object.assign(this, {
-        Antares
+        Antares,
+        Actions,
+        announce: Antares.announce
     })
     // TODO define startup code here
 })
