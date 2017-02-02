@@ -21,5 +21,14 @@ export default {
                 payload: {
                     score: [0.5, 0.5]
                 }
+            })),
+    makingMoveDeclinesDraw: action$ =>
+        action$.ofType('Move.make')
+            .map(a => createConsequence(a, {
+                type: 'Draw.reply',
+                payload: {
+                    player: a.payload.player,
+                    accept: false
+                }
             }))
 }

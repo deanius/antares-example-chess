@@ -16,5 +16,14 @@ export default {
                 key: 'game:demo'
             }
         }
+    }),
+    move: ({ player, from, to, promotionChoice }) => ({
+        type: 'Move.make',
+        payload: { player, from, to, promotionChoice },
+        meta: {
+            antares: {
+                key: 'game:demo'
+            }
+        }
     })
 }
