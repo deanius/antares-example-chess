@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor'
 import { AntaresMeteorInit, AntaresInit, inAgencyRun } from 'meteor/deanius:antares'
 import * as Actions from './actions'
 import * as Fixtures from '../fixtures'
@@ -16,7 +17,12 @@ export const Antares = AntaresMeteorInit(AntaresInit)(AntaresConfig)
 
 //seed it up
 inAgencyRun('server', () => {
-    Antares.announce(Actions.Game.start((new Fixtures.Game).toJS()))
+    Antares.firstSubscriber
+        .then(() => new Promise(resolve => setTimeout(resolve, 2000)))
+        .then(Meteor.bindEnvironment(() => {
+        console.log('AD> starting a seed game')
+        Antares.announce(Actions.Game.start, (new Fixtures.Game()).toJS())
+    }))
 })
 
 inAgencyRun('client', () => {
