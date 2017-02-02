@@ -1,4 +1,4 @@
-import { createConsequence } from 'meteor/deanius:antares'
+import { localConsequence } from 'meteor/deanius:antares'
 
 /*
 Example usage:
@@ -10,21 +10,31 @@ drawEpicEndPromise = announce(Actions.Draw.offer, { player: 'Self' })
 export default {
     replyToDrawConcludesOffer: action$ =>
         action$.ofType('Draw.reply')
-            .map(a => ({
+            // By emitting an .end event, we allow callers to hook onto
+            // the arrival of this event to know this Draw.offer epic is over
+            .map(a => localConsequence(a, {
                 type: 'Draw.offer.end'
             })),
+
     acceptingDrawEndsGame: action$ =>
         action$.ofType('Draw.reply')
+            // In cases of accepting the draw
             .filter(a => a.payload.accept)
-            .map(a => createConsequence(a, {
+            // Create a consequence that ends the game, assigning the score.
+            .map(a => localConsequence(a, {
                 type: 'Game.end',
                 payload: {
                     score: [0.5, 0.5]
                 }
             })),
-    makingMoveDeclinesDraw: action$ =>
+
+    makingMoveDeclinesDraw: (action$, store) =>
         action$.ofType('Move.make')
-            .map(a => createConsequence(a, {
+            // Dont consider moves made unless there's a draw outstanding
+            .filter(a =>
+                store.getState().antares.getIn(['game:demo', 'draw']))
+            // then turn them into declines of the draw
+            .map(a => localConsequence(a, {
                 type: 'Draw.reply',
                 payload: {
                     player: a.payload.player,
