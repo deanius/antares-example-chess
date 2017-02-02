@@ -7,7 +7,7 @@ export default class Game {
             players: ['Self', 'Other'],
             position: {},
             nextToMove: 'white',
-            draw: new Draw.pending(),
+            draw: null,
             active: true,
             score: null
         })

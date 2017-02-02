@@ -1,5 +1,11 @@
 export default {
-    offer: () => ({
-        type: 'Draw.offer'
+    offer: ({ player }) => ({
+        type: 'Draw.offer',
+        payload: { player },
+        meta: {
+            antares: {
+                key: 'game:demo'
+            }
+        }
     })
 }
