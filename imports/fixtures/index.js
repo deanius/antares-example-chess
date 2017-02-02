@@ -1,12 +1,13 @@
 import { inAgencyRun } from 'meteor/deanius:antares'
-import { default as Draw } from './draw'
-
+import Draw from './draw'
+import Game from './game'
 inAgencyRun('any', function () {
     Object.assign(this, {
         Fixtures: {
-            Draw
+            Draw,
+            Game
         }
     })
 })
 
-export { Draw }
+export { Draw, Game }
