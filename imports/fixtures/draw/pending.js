@@ -1,6 +1,4 @@
-import { Antares } from '/imports/antares/main'
-
-const { Immutable } = Antares
+import Immutable from 'immutable'
 
 export default class Draw {
     constructor() {
