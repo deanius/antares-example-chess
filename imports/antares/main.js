@@ -1,7 +1,10 @@
 import { AntaresMeteorInit, AntaresInit, inAgencyRun } from 'meteor/deanius:antares'
+import * as Actions from './actions'
 
 // Build up a config object, via imports
-const AntaresConfig = {}
+const AntaresConfig = {
+    Actions
+}
 
 // Pass the config to the meteorized version of AntaresInit
 export const Antares = AntaresMeteorInit(AntaresInit)(AntaresConfig)
