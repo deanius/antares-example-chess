@@ -1,10 +1,12 @@
 import { AntaresMeteorInit, AntaresInit, inAgencyRun } from 'meteor/deanius:antares'
 import * as Actions from './actions'
 import * as Fixtures from '../fixtures'
+import gameReducer from './reducers/game'
 
 // Build up a config object, via imports
 const AntaresConfig = {
-    Actions
+    Actions,
+    ReducerForKey: () => gameReducer
 }
 
 // Pass the config to the meteorized version of AntaresInit

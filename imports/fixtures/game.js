@@ -6,7 +6,10 @@ export default class Game {
         return Immutable.fromJS({
             players: ['Self', 'Other'],
             position: {},
-            draw: new Draw.pending()
+            nextToMove: 'white',
+            draw: new Draw.pending(),
+            active: true,
+            score: null
         })
     }
 }
