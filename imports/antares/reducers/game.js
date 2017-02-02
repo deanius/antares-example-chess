@@ -12,8 +12,15 @@ export default createReducer({
 
         return state.set('draw', fromJS({
             status: 'pending',
-            offeredBy: player,
-            accepted: null
+            offeredBy: player
         }))
+    },
+    'Draw.reply': (state, { player, accept }) => {
+        if (state.getIn(['draw', 'offeredBy']) == player)
+            throw new Error('Cannot reply to ones own draw')
+
+        return accept ?
+            state.setIn(['draw', 'status'], 'accepted') :
+            state.delete('draw')
     }
 }, fromJS({}))

@@ -7,5 +7,14 @@ export default {
                 key: 'game:demo'
             }
         }
+    }),
+    reply: ({ player, accept }) => ({
+        type: 'Draw.reply',
+        payload: { player, accept },
+        meta: {
+            antares: {
+                key: 'game:demo'
+            }
+        }
     })
 }

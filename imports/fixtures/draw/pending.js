@@ -4,8 +4,7 @@ export default class Draw {
     constructor() {
         return Immutable.fromJS({
             status: 'pending',
-            offeredBy: 'Other',
-            accepted: null
+            offeredBy: 'Other'
         })
     }
 }
