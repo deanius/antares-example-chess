@@ -1,4 +1,4 @@
-import { localConsequence } from 'meteor/deanius:antares'
+import { localConsequence, createPromiseEpic } from 'meteor/deanius:antares'
 
 /*
 Example usage:
@@ -40,5 +40,32 @@ export default {
                     player: a.payload.player,
                     accept: false
                 }
-            }))
+            })),
+    /*
+    When actions cannot be completed immediately, because their fulfillment
+    is async (such as when using remote resources), we break their fulfillment
+    into multiple actions, and call the whole bunch of them an Epic.
+
+    Here's an example of using an epic Quota.query, which we can see as a
+    Quota.query.begin action when the remote request has begun, and a
+    Quota.query.end (or .error) action when it's completed or errored
+    
+    We use the startOfEpic() and endOfEpic() promises to add handlers
+    to these points in time.
+
+```    
+let announcedAction = announce('Quota.query', { remaining: 'Unknown MB' })
+announcedAction.startOfEpic()
+  .then(x => console.log('Started: ', x))
+
+announcedAction.endOfEpic()
+  .then(x => console.log('Success!', x))
+  .catch(e => console.warn('Error:', e))
+```
+    */
+    exampleEpic: createPromiseEpic('Quota.query', () => {
+        return new Promise(resolve => {
+            setTimeout(() => { resolve({ remaining: '25 Mb' }) }, 2000)
+        })
+    })
 }
