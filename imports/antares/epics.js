@@ -2,10 +2,10 @@ import { localConsequence, createPromiseEpic } from 'meteor/deanius:antares'
 
 /*
 Example usage:
-drawEpicEndPromise = announce(Actions.Draw.offer, { player: 'Self' })
-    .then( result => { console.log('Draw offer delivered'); return result } )
-    .then( ({epic}) => epic.promiseEnd() )
-    .then( () => console.log('The Draw Epic Is Finito.') )
+drawOffer = announce(Actions.Draw.offer, { player: 'Self' })
+drawOffer.endOfEpic()
+  .then( () => console.log('The Draw Epic Has Concluded (Game drawn, or offer declined).') )
+    
 */
 export default {
     replyToDrawConcludesOffer: action$ =>
