@@ -4,6 +4,7 @@ import * as Actions from './actions'
 import * as Fixtures from '../fixtures'
 import Epics from './epics'
 import gameReducer from './reducers/game'
+import { mount } from 'react-mounter'
 
 // Build up a config object, via imports
 const AntaresConfig = {
