@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { mount } from 'react-mounter'
-import { store } from '/imports/antares/main'
+import { store, announce } from '/imports/antares/main'
 
-const game = ({ drawIsVisible, drawIsMine }) => (
+const game = ({ drawIsVisible, drawIsMine, offerDraw }) => (
     <div>
         <h3>The Game...</h3>
         { 
@@ -24,6 +24,12 @@ const game = ({ drawIsVisible, drawIsMine }) => (
                 }
             </div>
         }
+        { 
+            !drawIsVisible() &&
+            <div className="draw-offer">
+                <button onClick={offerDraw}>Offer Draw</button>
+            </div>
+        }
     </div>
 )
 
@@ -42,6 +48,12 @@ const mapStateToProps = state => {
         },
         drawIsMine: () => {
             return game && game.getIn(['draw', 'offeredBy']) === currentUser
+        },
+        // Event handlers
+        offerDraw: () => {
+            announce(Actions.Draw.offer, { player: currentUser })
+                .endOfEpic()
+                .then(() => console.log('The Draw Epic Is Finito.'))
         }
     }
 }

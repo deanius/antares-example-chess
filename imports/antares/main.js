@@ -14,7 +14,7 @@ const AntaresConfig = {
 
 // Pass the config to the meteorized version of AntaresInit
 export const Antares = AntaresMeteorInit(AntaresInit)(AntaresConfig)
-export const { store } = Antares
+export const { store, announce } = Antares
 
 //seed it up
 inAgencyRun('server', () => {
