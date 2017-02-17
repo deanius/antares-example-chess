@@ -18,12 +18,11 @@ export const { store, announce } = Antares
 
 //seed it up
 inAgencyRun('server', () => {
-    Antares.firstSubscriber
-        .then(() => new Promise(resolve => setTimeout(resolve, 2000)))
+    Antares.startup
         .then(Meteor.bindEnvironment(() => {
-        console.log('AD> starting a seed game')
-        Antares.announce(Actions.Game.start, (new Fixtures.Game()).toJS())
-    }))
+            console.log('AD> starting a seed game')
+            Antares.announce(Actions.Game.start, (new Fixtures.Game()).toJS())
+        }))
 })
 
 inAgencyRun('client', () => {
