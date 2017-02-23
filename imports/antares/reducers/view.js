@@ -2,7 +2,7 @@ import { createReducer } from 'redux-act'
 import { combineReducers } from 'redux-immutable'
 
 export const ViewReducer = combineReducers({
-    viewingAs: createReducer({
-        'View.changeSides': viewingAs => (viewingAs === 'Self' ? 'Other' : 'Self')
+    currentPlayer: createReducer({
+        'View.changeSides': currentPlayer => (currentPlayer === 'Self' ? 'Other' : 'Self')
     }, 'Self')
 })

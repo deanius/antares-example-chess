@@ -16,5 +16,9 @@ export default {
                 key: 'game:demo'
             }
         }
+    }),
+    accept: () => ({
+        type: 'Draw.reply',
+        payload
     })
 }
