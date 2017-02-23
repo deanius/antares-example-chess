@@ -5,7 +5,10 @@ export default class Game {
     constructor() {
         return Immutable.fromJS({
             players: ['Self', 'Other'],
-            position: {},
+            position: {
+                e1: 'wK',
+                e8: 'bK'
+            },
             nextToMove: 'white',
             draw: null,
             active: true,

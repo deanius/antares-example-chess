@@ -4,12 +4,14 @@ import * as Actions from './actions'
 import * as Fixtures from '../fixtures'
 import Epics from './epics'
 import gameReducer from './reducers/game'
+import { ViewReducer } from './reducers/view'
 
 // Build up a config object, via imports
 const AntaresConfig = {
     Actions,
     ReducerForKey: () => gameReducer,
-    Epics
+    Epics,
+    ViewReducer
 }
 
 // Pass the config to the meteorized version of AntaresInit
