@@ -13,7 +13,8 @@ export default {
             // By emitting an .end event, we allow callers to hook onto
             // the arrival of this event to know this Draw.offer epic is over
             .map(a => localConsequence(a, {
-                type: 'Draw.offer.end'
+                type: 'Draw.offer.end',
+                payload: a.payload
             })),
 
     acceptingDrawEndsGame: action$ =>

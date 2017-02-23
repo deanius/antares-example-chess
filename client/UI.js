@@ -88,7 +88,9 @@ const mapStateToProps = state => {
             announce(Actions.Draw.offer, { player: currentPlayer })
                 .endOfEpic()
                 // This is how you attach behavior to the end of an epic that an action triggers
-                .then(() => console.log('The Draw Epic Is Finito.'))
+                .then(({ payload }) => {
+                    alert( payload.accept ? 'Your draw was accepted - lucky bastard' : 'Damn - they declined yo draw, fool!')
+                })
         }
     }
 }
