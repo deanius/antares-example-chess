@@ -52,6 +52,9 @@ const game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw,
                 Draw Staus: { drawStatus() }
             </div>
         }
+        <div>
+            <img src="/chessboard.gif" />
+        </div>    
     </div>
 )
 
