@@ -53,7 +53,11 @@ const game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw,
             </div>
         }
         <div>
-            <img src="/chessboard.gif" />
+            <img src="/chessboard.gif" onClick={(e) => {
+                // a temporary way to allow a move until the board is truly live
+                announce(Actions.Game.move, { from: 'e2', to: 'e4', player: currentPlayer })
+                e.preventDefault()
+            }} />
         </div>    
     </div>
 )
