@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { mount } from 'react-mounter'
 import { store, announce } from '/imports/antares/main'
 
-const game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw, currentPlayer }) => (
+const _Game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw, currentPlayer }) => (
     <div>
-        <h3>The Game...</h3>
-                <div className="sm">
+        <h2>Antares Chess: &nbsp;
+        <span>
                     View As: <b>{currentPlayer}</b> &nbsp;|&nbsp;
                     <a
                       href="#change-sides"
@@ -15,7 +15,8 @@ const game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw,
                           e.preventDefault()
                       }}
                     >{currentPlayer === 'Self' ? 'Other' : 'Self'}</a>
-                </div>
+            </span>
+        </h2>
         { 
             drawIsVisible() && 
             <div className="draw">
@@ -43,7 +44,8 @@ const game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw,
         { 
             !drawIsVisible() &&
             <div className="draw-offer">
-                <button onClick={offerDraw}>Offer Draw</button>
+                <button onClick={offerDraw} style={{ fontSize: '150%', margin: '.5em' }}
+                >Offer Draw</button>
             </div>
         }
         {
@@ -102,4 +104,7 @@ const mapStateToProps = state => {
     }
 }
 
-mount(connect(mapStateToProps)(game), { store })
+const Game = connect(mapStateToProps)(_Game)
+// mount it at #react-root, placing store in the props
+const props = { store }
+mount(Game, props)
