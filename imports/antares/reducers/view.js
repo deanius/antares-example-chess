@@ -3,6 +3,6 @@ import { combineReducers } from 'redux-immutable'
 
 export const ViewReducer = combineReducers({
     currentPlayer: createReducer({
-        'View.changeSides': currentPlayer => (currentPlayer === 'Self' ? 'Other' : 'Self')
-    }, 'Self')
+        'View.changeSides': currentPlayer => (currentPlayer === 'White' ? 'Black' : 'White')
+    }, 'White')
 })

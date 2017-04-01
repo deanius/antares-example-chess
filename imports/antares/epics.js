@@ -2,7 +2,7 @@ import { localConsequence, createPromiseEpic } from 'meteor/deanius:antares'
 
 /*
 Example usage:
-drawOffer = announce(Actions.Draw.offer, { player: 'Self' })
+drawOffer = announce(Actions.Draw.offer, { player: 'White' })
 drawOffer.endOfEpic()
   .then( () => console.log('The Draw Epic Has Concluded (Game drawn, or offer declined).') )
     

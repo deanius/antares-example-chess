@@ -14,7 +14,7 @@ const _Game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw
             announce(Actions.View.changeSides)
             e.preventDefault()
           }}
-        >{currentPlayer === 'Self' ? 'Other' : 'Self'}</a>
+        >{currentPlayer === 'White' ? 'Black' : 'White'}</a>
       </span>
     </h2>
     {

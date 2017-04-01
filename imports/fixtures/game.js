@@ -4,7 +4,7 @@ import * as Draw from './draw'
 export default class Game {
     constructor() {
         return Immutable.fromJS({
-            players: ['Self', 'Other'],
+            players: ['White', 'Black'],
             position: {
                 e1: 'wK',
                 e8: 'bK'
