@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { mount } from 'react-mounter'
 import { store, announce } from '/imports/antares/main'
+import ChessBoard from '/imports/ChessBoard'
+import GameFixture from '/imports/fixtures/game'
 
 const _Game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw, currentPlayer }) => (
   <div>
@@ -55,11 +57,14 @@ const _Game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw
       </div>
     }
     <div>
-      <img src="/chessboard.gif" onClick={(e) => {
+      <ChessBoard game={(new GameFixture).toJS()}
+        orientation={currentPlayer}  
+      />
+      {/*<img src="/chessboard.gif" onClick={(e) => {
         // a temporary way to allow a move until the board is truly live
         announce(Actions.Game.move, { from: 'e2', to: 'e4', player: currentPlayer })
         e.preventDefault()
-      }} />
+      }} />*/}
     </div>
   </div>
 )
