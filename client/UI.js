@@ -4,6 +4,7 @@ import { mount } from 'react-mounter'
 import { store, announce } from '/imports/antares/main'
 import ChessBoard from '/imports/ChessBoard'
 import GameFixture from '/imports/fixtures/game'
+import { Bert } from 'meteor/themeteorchef:bert'
 
 const _Game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw, currentPlayer }) => (
   <div>
@@ -103,7 +104,7 @@ const mapStateToProps = state => {
         .endOfEpic()
         // This is how you attach behavior to the end of an epic that an action triggers
         .then(({ payload }) => {
-          alert(payload.accept ? 'Your draw was accepted - lucky bastard' : 'Damn - they declined yo draw, fool!')
+          Bert.alert(payload.accept ? 'Your draw was accepted - lucky bastard' : 'Damn - they declined yo draw, fool!', 'info')
         })
     }
   }

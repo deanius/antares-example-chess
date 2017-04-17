@@ -7,7 +7,10 @@ export default class Game {
             players: ['White', 'Black'],
             position: {
                 e1: 'wK',
-                e8: 'bK'
+                f2: 'wP',
+                e8: 'bK',
+                d7: 'bQ',
+                f7: 'bR'
             },
             nextToMove: 'white',
             draw: null,
