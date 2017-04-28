@@ -23,5 +23,11 @@ export default createReducer({
         return accept ?
             state.setIn(['draw', 'status'], 'accepted') :
             state.delete('draw')
+    },
+    'Move.make': (state, { from, to }) => {
+        let mover = state.getIn(['position', from])
+        return state
+            .deleteIn(['position', from])
+            .setIn(['position', to], mover)
     }
 }, fromJS({}))

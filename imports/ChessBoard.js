@@ -2,6 +2,8 @@
 import { Meteor } from 'meteor/meteor'
 import { $ } from 'meteor/jquery'
 import React from 'react'
+import { Antares } from '/imports/antares/main'
+import Actions from '/imports/antares/actions'
 
 const chessboardId = 'chessboard-js'
 
@@ -14,8 +16,7 @@ let rebindChessBoard = ({ game, orientation }) => {
         onDrop: (from, to) => {
             if (from === to || (to === 'offboard')) { return }
 
-            let mover = position[from]
-            console.log('TODO move')
+            Antares.announce(Actions.Game.move({ from, to }))
         }
     })
 }
