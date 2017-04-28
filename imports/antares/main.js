@@ -5,6 +5,7 @@ import * as Fixtures from '../fixtures'
 import Epics from './epics'
 import gameReducer from './reducers/game'
 import { ViewReducer } from './reducers/view'
+import Lockr from 'lockr'
 
 // Build up a config object, via imports
 const AntaresConfig = {
@@ -30,6 +31,20 @@ inAgencyRun('server', () => {
 inAgencyRun('client', () => {
     Antares.subscribe({
         key: 'game:demo'
+    })
+    Antares.subscribeRenderer(({ action }) => {
+        if (action.type.startsWith('View.')) {
+            Lockr.set('Antares.viewData', Antares.getViewState().toJS())
+        }
+    })
+    Antares.startup.then(() => {
+        let saved = Lockr.get('Antares.viewData')
+        if (!saved) return
+        Antares.announce({
+            type: 'View.restore',
+            payload: saved,
+            meta: { antares: { localOnly: true } }
+        })
     })
 })
 

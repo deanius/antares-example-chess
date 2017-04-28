@@ -1,8 +1,10 @@
-import { createReducer } from 'redux-act'
-import { combineReducers } from 'redux-immutable'
+import { createReducer, combineReducers, iMap, fromJS } from 'meteor/deanius:antares'
 
-export const ViewReducer = combineReducers({
-    currentPlayer: createReducer({
-        'View.changeSides': currentPlayer => (currentPlayer === 'White' ? 'Black' : 'White')
-    }, 'White')
-})
+export const ViewReducer = createReducer({
+    'View.changeSides': state =>
+        state.get('currentPlayer') === 'White' ?
+            state.set('currentPlayer', 'Black') :
+            state.set('currentPlayer', 'White'),
+
+    'View.restore': (old, newState) => fromJS(newState)
+}, new iMap())
