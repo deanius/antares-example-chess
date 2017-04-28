@@ -6,7 +6,18 @@ import ChessBoard from '/imports/ChessBoard'
 import GameFixture from '/imports/fixtures/game'
 import { Bert } from 'meteor/themeteorchef:bert'
 
-const _Game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw, currentPlayer }) => (
+const gameOverStyle = {
+  position: 'absolute',
+  fontSize: '6em',
+  opacity: 0.6,
+  top: 0,
+  left: 0,
+  backgroundColor: 'black',
+  color: 'white',
+  zIndex: 100
+}
+
+const _Game = ({ gameOver, drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw, currentPlayer }) => (
   <div>
     <h2>Antares Chess: &nbsp;
         <span>
@@ -52,14 +63,20 @@ const _Game = ({ drawIsVisible, drawConcluded, drawStatus, drawIsMine, offerDraw
       </div>
     }
     {
-      drawConcluded() &&
+      !gameOver() && drawConcluded() &&
       <div className="draw-status">
         Draw Staus: {drawStatus()}
       </div>
     }
+    {
+      gameOver() &&
+      <div className="game-over" style={gameOverStyle}>
+        Game Over!
+      </div>
+    }
     <div>
       <ChessBoard game={(new GameFixture).toJS()}
-        orientation={currentPlayer}  
+        orientation={currentPlayer}
       />
       {/*<img src="/chessboard.gif" onClick={(e) => {
         // a temporary way to allow a move until the board is truly live
@@ -85,7 +102,7 @@ const mapStateToProps = state => {
   return {
     // View fields
     currentPlayer: state.view.get('currentPlayer'),
-    // Accessors/Helpers for persisted data 
+    // Accessors/Helpers for persisted data
     drawIsVisible: () => {
       return game && game.get('draw') && game.getIn(['draw', 'status']) !== 'accepted'
     },
@@ -94,6 +111,9 @@ const mapStateToProps = state => {
     },
     drawStatus: () => {
       return game.getIn(['draw', 'status'])
+    },
+    gameOver: () => {
+      return  game && !game.get('active')
     },
     drawIsMine: () => {
       return game && game.getIn(['draw', 'offeredBy']) === currentPlayer

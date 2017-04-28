@@ -24,7 +24,7 @@ export default class ChessBoard extends React.Component {
     render() {
         return (
             <div>
-                <div id={ chessboardId } style={ {width: 600} }></div>
+                <div id={ chessboardId } style={ {width: 450} }></div>
             </div>
         )
     }
