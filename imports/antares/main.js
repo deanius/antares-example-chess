@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { AntaresMeteorInit, AntaresInit, inAgencyRun } from 'meteor/deanius:antares'
+import { AntaresMeteorInit, AntaresInit, inAgencyRun, isInAgency } from 'meteor/deanius:antares'
 import * as Actions from './actions'
 import * as Fixtures from '../fixtures'
 import Epics from './epics'
@@ -12,7 +12,10 @@ const AntaresConfig = {
     Actions,
     ReducerForKey: () => gameReducer,
     Epics,
-    ViewReducer
+    ViewReducer,
+    MetaEnhancers: [
+        () => ({ originAgentId: Antares.agentId })
+    ]
 }
 
 // Pass the config to the meteorized version of AntaresInit
@@ -53,6 +56,8 @@ inAgencyRun('any', function () {
     Object.assign(this, {
         Antares,
         Actions,
+        inAgencyRun,
+        isInAgency,
         announce: Antares.announce
     })
     // TODO define startup code here

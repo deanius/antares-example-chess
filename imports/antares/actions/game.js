@@ -1,3 +1,4 @@
+// LEFTOFF  - meta: antares: {epics: {runInAgency: 'server'}}
 export default {
     start: (game) => ({
         type: 'Antares.store',

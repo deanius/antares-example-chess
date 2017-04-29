@@ -124,7 +124,7 @@ const mapStateToProps = state => {
         .endOfEpic()
         // This is how you attach behavior to the end of an epic that an action triggers
         .then(({ payload }) => {
-          Bert.alert(payload.accept ? 'Your draw was accepted - lucky bastard' : 'Damn - they declined yo draw, fool!', 'info')
+          Bert.alert(payload.accept ? 'Your draw was accepted - lucky bastard' : 'Damn - they declined yo draw!', 'info')
         })
     }
   }
