@@ -13,9 +13,7 @@ const AntaresConfig = {
     ReducerForKey: () => gameReducer,
     Epics,
     ViewReducer,
-    MetaEnhancers: [
-        () => ({ originAgentId: Antares.agentId })
-    ]
+    MetaEnhancers: []
 }
 
 // Pass the config to the meteorized version of AntaresInit
