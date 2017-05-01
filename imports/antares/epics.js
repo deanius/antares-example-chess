@@ -4,7 +4,7 @@ import GameFixture from '/imports/fixtures/game'
 
 /*
 Example usage:
-drawOffer = announce(Actions.Draw.offer, { player: 'White' })
+drawOffer = announce(Actions.Draw.offer({ player: 'White' }))
 drawOffer.endOfEpic()
   .then( () => console.log('The Draw Epic Has Concluded (Game drawn, or offer declined).') )
 
@@ -13,15 +13,27 @@ drawOffer.endOfEpic()
 const epics = {}
 
 inAgencyRun('server', () => {
+    // Given a stream of actions to query, and a drawOffer,
+    // returns an Observable for
+    const concludeDrawUponReply = action$ => drawOffer => {
+        return action$
+            .ofType('Draw.reply')
+            // By emitting an .end event, we allow callers to hook onto
+            // the arrival of this event to know this Draw.offer epic is over
+            .map(a => createConsequence(a, {
+                type: 'Draw.offer.end',
+                payload: a.payload,
+                meta: {
+                    antares: {
+                        concludesEpic: drawOffer.meta.antares.actionId
+                    }
+                }
+            }))
+    }
     Object.assign(epics, {
         replyToDrawConcludesOffer: action$ =>
-            action$.ofType('Draw.reply')
-                // By emitting an .end event, we allow callers to hook onto
-                // the arrival of this event to know this Draw.offer epic is over
-                .map(a => createConsequence(a, {
-                    type: 'Draw.offer.end',
-                    payload: a.payload
-                })),
+            action$.ofType('Draw.offer')
+                .flatMap(concludeDrawUponReply(action$)),
 
         acceptingDrawEndsGame: action$ =>
             action$.ofType('Draw.reply')
