@@ -1,3 +1,3 @@
-import '/imports/antares/main'
+import '/imports/antares/'
 import '/imports/fixtures'
 import './UI'

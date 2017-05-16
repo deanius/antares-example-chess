@@ -32,7 +32,7 @@ inAgencyRun('server', () => {
     }
     Object.assign(epics, {
         replyToDrawConcludesOffer: action$ =>
-            action$.ofType('Draw.offer')
+            action$.filter(a => a.type === 'Draw.offer')
                 .flatMap(concludeDrawUponReply(action$)),
 
         acceptingDrawEndsGame: action$ =>

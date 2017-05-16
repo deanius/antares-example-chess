@@ -2,7 +2,7 @@
 import { Meteor } from 'meteor/meteor'
 import { $ } from 'meteor/jquery'
 import React from 'react'
-import { Antares } from '/imports/antares/main'
+import { Antares } from '/imports/antares/'
 import Actions from '/imports/antares/actions'
 
 const chessboardId = 'chessboard-js'

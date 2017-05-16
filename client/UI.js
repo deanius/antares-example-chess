@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { mount } from 'react-mounter'
-import { store, announce } from '/imports/antares/main'
+import { store, announce } from '/imports/antares/'
 import ChessBoard from '/imports/ChessBoard'
 import GameFixture from '/imports/fixtures/game'
 import { Bert } from 'meteor/themeteorchef:bert'

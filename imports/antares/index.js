@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { AntaresMeteorInit, AntaresInit, inAgencyRun, isInAgency } from 'meteor/deanius:antares'
+import { AntaresInit, inAgencyRun, isInAgency } from 'meteor/deanius:antares'
 import * as Actions from './actions'
 import * as Fixtures from '../fixtures'
 import Epics from './epics'
@@ -17,7 +17,7 @@ const AntaresConfig = {
 }
 
 // Pass the config to the meteorized version of AntaresInit
-export const Antares = AntaresMeteorInit(AntaresInit)(AntaresConfig)
+export const Antares = AntaresInit(AntaresConfig)
 export const { store, announce } = Antares
 
 //seed it up
